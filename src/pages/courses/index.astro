@@ -1,0 +1,107 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CourseCard from '../../components/CourseCard.astro';
+import { getCollection } from 'astro:content';
+
+const courses = await getCollection('courses');
+const sorted = courses.sort((a, b) => a.data.order - b.data.order);
+const published = sorted.filter(c => c.data.status === 'published');
+const upcoming  = sorted.filter(c => c.data.status === 'coming-soon');
+---
+
+<BaseLayout
+  title="Courses — Vrit Jobs Training"
+  description="Browse all available corporate training courses from Vrit Jobs."
+>
+  <section class="page-hero">
+    <div class="container">
+      <p class="page-eyebrow">Vrit Jobs Training</p>
+      <h1 class="page-title">All Courses</h1>
+      <p class="page-sub">
+        Practical, hands-on workshops built for Nepal's modern workplace.
+        Every course includes downloadable practice files.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      {published.length > 0 && (
+        <>
+          <h2 class="catalog-heading">Available Now</h2>
+          <div class="grid-3" style="margin-bottom: 64px;">
+            {published.map(course => (
+              <CourseCard
+                title={course.data.title}
+                slug={course.slug}
+                tagline={course.data.tagline}
+                duration={course.data.duration}
+                moduleCount={course.data.moduleCount}
+                level={course.data.level}
+                status={course.data.status}
+
+              />
+            ))}
+          </div>
+        </>
+      )}
+
+      {upcoming.length > 0 && (
+        <>
+          <h2 class="catalog-heading">Coming Soon</h2>
+          <div class="grid-3">
+            {upcoming.map(course => (
+              <CourseCard
+                title={course.data.title}
+                slug={course.slug}
+                tagline={course.data.tagline}
+                duration={course.data.duration}
+                moduleCount={course.data.moduleCount}
+                level={course.data.level}
+                status={course.data.status}
+
+              />
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero {
+    background: var(--ink);
+    padding: 72px 0 56px;
+  }
+  .page-eyebrow {
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 16px;
+  }
+  .page-title {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 6vw, 60px);
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.05;
+    margin-bottom: 16px;
+  }
+  .page-sub {
+    font-size: 18px;
+    color: rgba(255,255,255,0.6);
+    max-width: 520px;
+    line-height: 1.65;
+  }
+  .catalog-heading {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 20px;
+  }
+</style>

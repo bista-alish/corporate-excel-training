@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Page Not Found — Vrit Jobs Training">
+  <section class="not-found">
+    <div class="container not-found-inner">
+      <div class="not-found-num" aria-hidden="true">404</div>
+      <h1 class="not-found-title">Page not found</h1>
+      <p class="not-found-sub">The page you're looking for doesn't exist or has moved.</p>
+      <div style="display:flex; gap:12px; flex-wrap:wrap;">
+        <a href="/" class="btn btn-primary">Go Home</a>
+        <a href="/courses" class="btn btn-secondary">Browse Courses</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    background: var(--navy);
+  }
+  .not-found-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+  .not-found-num {
+    font-family: var(--font-display);
+    font-size: 120px;
+    font-weight: 800;
+    color: rgba(255,255,255,0.06);
+    line-height: 1;
+    user-select: none;
+  }
+  .not-found-title {
+    font-family: var(--font-display);
+    font-size: 40px;
+    font-weight: 800;
+    color: #fff;
+  }
+  .not-found-sub {
+    font-size: 18px;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 8px;
+  }
+</style>

@@ -1,0 +1,302 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CourseCard from '../components/CourseCard.astro';
+import { getCollection } from 'astro:content';
+
+const allCourses = await getCollection('courses');
+const published = allCourses
+  .filter(c => c.data.status === 'published')
+  .sort((a, b) => a.data.order - b.data.order);
+const featuredCourse = published[0];
+---
+
+<BaseLayout
+  title="Vrit Jobs — Corporate Training"
+  description="Hands-on corporate training that builds real, job-ready skills. Start with Microsoft Excel."
+>
+
+  <!-- ── Hero ── -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="hero-eyebrow">Vrit Jobs · Corporate Training Programme</div>
+      <h1 class="hero-title">
+        Real skills.<br>Real results.
+      </h1>
+      <p class="hero-sub">
+        Hands-on workshops designed for Nepal's modern workplace.
+        Each course ends when your team can actually do the thing — not just watch it.
+      </p>
+      <div class="hero-cta">
+        <a href="/courses" class="btn btn-primary btn-lg">Browse Courses</a>
+        {featuredCourse && (
+          <a href={`/courses/${featuredCourse.slug}`} class="btn btn-ghost btn-lg">
+            Start Excel →
+          </a>
+        )}
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><span class="hero-stat-num">7</span><span class="hero-stat-lbl">Modules</span></div>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat"><span class="hero-stat-num">3h</span><span class="hero-stat-lbl">Workshop</span></div>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat"><span class="hero-stat-num">8</span><span class="hero-stat-lbl">Practice files</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Featured course ── -->
+  {featuredCourse && (
+    <section class="section">
+      <div class="container">
+        <div class="featured-header">
+          <div>
+            <p class="featured-eyebrow">Featured Course</p>
+            <h2 class="section-title">{featuredCourse.data.title}</h2>
+            <p class="section-sub">{featuredCourse.data.description}</p>
+          </div>
+          <a href={`/courses/${featuredCourse.slug}`} class="btn btn-primary">
+            View Course
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </a>
+        </div>
+
+        <div class="featured-modules">
+          {featuredCourse.data.modules.map((mod) => (
+            <div class="featured-module">
+              <span class="featured-module-num">{String(mod.n).padStart(2, '0')}</span>
+              <span class="featured-module-name">{mod.name}</span>
+              <span class="featured-module-time">{mod.minutes} min</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- ── Value props ── -->
+  <section class="section value-section">
+    <div class="container">
+      <h2 class="section-title" style="text-align:center; margin-bottom:48px;">Why Vrit Jobs Training?</h2>
+      <div class="grid-3">
+        {[
+          { icon: '🎯', title: 'Practice-first', body: 'Every module ends with a timed challenge. Skills stick because participants actually do the work.' },
+          { icon: '📥', title: 'Take-home files', body: 'Downloadable .xlsx practice workbooks for every module — built with real-world data from Nepal.' },
+          { icon: '📊', title: 'Workplace-ready', body: 'Content calibrated to what teams actually do: payroll, reports, data cleaning, dashboards.' },
+        ].map(({ icon, title, body }) => (
+          <div class="value-card">
+            <div class="value-icon" aria-hidden="true">{icon}</div>
+            <h3 class="value-title">{title}</h3>
+            <p class="value-body">{body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Courses teaser ── -->
+  <section class="section">
+    <div class="container">
+      <div class="courses-header">
+        <div>
+          <h2 class="section-title">All Courses</h2>
+          <p class="section-sub">More courses launching throughout 2025.</p>
+        </div>
+        <a href="/courses" class="btn btn-secondary">See full catalog</a>
+      </div>
+      <div class="grid-3">
+        {allCourses
+          .sort((a, b) => a.data.order - b.data.order)
+          .map(course => (
+            <CourseCard
+              title={course.data.title}
+              slug={course.slug}
+              tagline={course.data.tagline}
+              duration={course.data.duration}
+              moduleCount={course.data.moduleCount}
+              level={course.data.level}
+              status={course.data.status}
+            />
+          ))}
+        <article class="course-card card course-card--dim">
+          <div class="course-card-accent"></div>
+          <div class="course-card-body">
+            <span class="badge" style="align-self:flex-start;">Coming Soon</span>
+            <h3 class="course-card-title">Power BI Essentials</h3>
+            <p class="course-card-tagline">Build interactive dashboards and share insights across your organisation.</p>
+          </div>
+        </article>
+        <article class="course-card card course-card--dim">
+          <div class="course-card-accent"></div>
+          <div class="course-card-body">
+            <span class="badge" style="align-self:flex-start;">Coming Soon</span>
+            <h3 class="course-card-title">Professional Communication</h3>
+            <p class="course-card-tagline">Emails, reports, and presentations that get decisions made faster.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA banner ── -->
+  <section class="cta-banner">
+    <div class="container cta-banner-inner">
+      <div>
+        <h2 class="cta-banner-title">Ready to train your team?</h2>
+        <p class="cta-banner-sub">Get in touch — we'll customise a programme for your organisation.</p>
+      </div>
+      <a href="mailto:training@vritjobs.com" class="btn btn-primary btn-lg">Contact Us</a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* ── Hero ── */
+  .hero {
+    background: var(--ink);
+    padding: 100px 0 80px;
+  }
+  .hero-eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 20px;
+  }
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(52px, 8vw, 96px);
+    font-weight: 800;
+    color: #fff;
+    line-height: 0.95;
+    margin-bottom: 28px;
+  }
+  .hero-sub {
+    font-size: 20px;
+    color: rgba(255,255,255,0.55);
+    max-width: 520px;
+    line-height: 1.65;
+    margin-bottom: 40px;
+  }
+  .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 56px; }
+  .btn-ghost {
+    background: rgba(255,255,255,0.08);
+    color: rgba(255,255,255,0.85);
+    border: 1.5px solid rgba(255,255,255,0.14);
+  }
+  .btn-ghost:hover { background: rgba(255,255,255,0.13); }
+  .hero-stats { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+  .hero-stat { display: flex; flex-direction: column; gap: 2px; }
+  .hero-stat-num {
+    font-family: var(--font-display);
+    font-size: 32px;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1;
+  }
+  .hero-stat-lbl { font-size: 13px; color: rgba(255,255,255,0.4); }
+  .hero-stat-divider { width: 1px; height: 36px; background: rgba(255,255,255,0.12); }
+
+  /* ── Featured ── */
+  .featured-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+  }
+  .featured-eyebrow {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .featured-modules {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+  }
+  .featured-module {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .featured-module-num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+  }
+  .featured-module-name {
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+  .featured-module-time { font-size: 12px; color: var(--muted); }
+
+  /* ── Value section ── */
+  .value-section { background: var(--surface); }
+  .value-card {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 32px 28px;
+  }
+  .value-icon { font-size: 28px; margin-bottom: 14px; }
+  .value-title {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+  .value-body { font-size: 15px; color: var(--muted); line-height: 1.6; }
+
+  /* ── Courses teaser ── */
+  .courses-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+  }
+
+  /* ── Inline coming-soon card styles ── */
+  .course-card { overflow: hidden; display: flex; flex-direction: column; }
+  .course-card--dim { opacity: 0.55; }
+  .course-card-accent { height: 3px; flex-shrink: 0; background: var(--border); }
+  .course-card-body { padding: 24px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+  .course-card-title { font-family: var(--font-display); font-size: 20px; font-weight: 800; color: var(--ink); }
+  .course-card-tagline { font-size: 14px; color: var(--muted); line-height: 1.55; }
+
+  /* ── CTA banner ── */
+  .cta-banner {
+    background: var(--ink);
+    padding: 64px 0;
+  }
+  .cta-banner-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .cta-banner-title {
+    font-family: var(--font-display);
+    font-size: 32px;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+  .cta-banner-sub { font-size: 17px; color: rgba(255,255,255,0.5); }
+</style>

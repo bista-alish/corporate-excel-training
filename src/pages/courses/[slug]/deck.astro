@@ -1,0 +1,106 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const courses = await getCollection('courses');
+  return courses
+    .filter(c => c.data.deckPath)
+    .map(course => ({
+      params: { slug: course.slug },
+      props: { course },
+    }));
+}
+
+interface Props {
+  course: CollectionEntry<'courses'>;
+}
+
+const { course } = Astro.props;
+const { title, deckPath } = course.data;
+const backHref = `/courses/${course.slug}`;
+---
+
+<BaseLayout
+  title={`${title} — Deck Viewer`}
+  description={`Interactive presentation for ${title}`}
+  noChrome={true}
+>
+  <div class="deck-wrap">
+    <iframe
+      id="deck-iframe"
+      src={deckPath}
+      title={title}
+      allowfullscreen
+      allow="fullscreen"
+    ></iframe>
+
+    <a href={backHref} class="back-btn" id="back-btn" aria-label="Back to course">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M13 8H3M7 4l-4 4 4 4"/>
+      </svg>
+      Back
+    </a>
+  </div>
+</BaseLayout>
+
+<style>
+  body { margin: 0; overflow: hidden; background: #000; }
+  .deck-wrap { position: fixed; inset: 0; }
+  #deck-iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+  }
+  .back-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 2147483646;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(0,0,0,0.72);
+    color: rgba(255,255,255,0.8);
+    border: 1px solid rgba(255,255,255,0.15);
+    backdrop-filter: blur(8px);
+    border-radius: 999px;
+    padding: 6px 14px 6px 10px;
+    font-family: var(--font-body, 'Inter', sans-serif);
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    opacity: 0;
+    transition: opacity 260ms ease, background 160ms ease;
+    pointer-events: none;
+  }
+  .back-btn.visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .back-btn:hover { background: rgba(0,0,0,0.88); color: #fff; }
+</style>
+
+<script>
+  // Focus iframe immediately so keyboard nav works without a click
+  const iframe = document.getElementById('deck-iframe') as HTMLIFrameElement;
+  iframe.addEventListener('load', () => iframe.focus());
+
+  // Show back button on mouse move, hide after 2.5s idle (mirrors deck overlay behavior)
+  const backBtn = document.getElementById('back-btn')!;
+  let hideTimer: ReturnType<typeof setTimeout> | null = null;
+
+  function showBack() {
+    backBtn.classList.add('visible');
+    if (hideTimer) clearTimeout(hideTimer);
+    hideTimer = setTimeout(() => backBtn.classList.remove('visible'), 2500);
+  }
+
+  window.addEventListener('mousemove', showBack, { passive: true });
+
+  // Keyboard: Escape navigates back
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') window.location.href = backBtn.getAttribute('href')!;
+  });
+</script>
