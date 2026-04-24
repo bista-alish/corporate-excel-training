@@ -1,7 +1,13 @@
 {
   "headers": [
     {
-      "source": "/deck/(.*\\.(js|css))",
+      "source": "/deck/(.*\\.js)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/deck/(.*\\.css)",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
       ]
