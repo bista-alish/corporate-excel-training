@@ -11,19 +11,19 @@ const featuredCourse = published[0];
 ---
 
 <BaseLayout
-  title="Vrit Jobs — Corporate Training"
-  description="Hands-on corporate training that builds real, job-ready skills. Start with Microsoft Excel."
+  title="Corporate Excel Training"
+  description="Hands-on corporate Excel training that builds real, job-ready skills."
 >
 
   <!-- ── Hero ── -->
   <section class="hero">
     <div class="container hero-inner">
-      <div class="hero-eyebrow">Vrit Jobs · Corporate Training Programme</div>
+      <div class="hero-eyebrow">Corporate Training Programme</div>
       <h1 class="hero-title">
         Real skills.<br>Real results.
       </h1>
       <p class="hero-sub">
-        Hands-on workshops designed for Nepal's modern workplace.
+        Hands-on workshops designed for the modern workplace.
         Each course ends when your team can actually do the thing — not just watch it.
       </p>
       <div class="hero-cta">
@@ -76,11 +76,11 @@ const featuredCourse = published[0];
   <!-- ── Value props ── -->
   <section class="section value-section">
     <div class="container">
-      <h2 class="section-title" style="text-align:center; margin-bottom:48px;">Why Vrit Jobs Training?</h2>
+      <h2 class="section-title" style="text-align:center; margin-bottom:48px;">Why this training?</h2>
       <div class="grid-3">
         {[
           { icon: '🎯', title: 'Practice-first', body: 'Every module ends with a timed challenge. Skills stick because participants actually do the work.' },
-          { icon: '📥', title: 'Take-home files', body: 'Downloadable .xlsx practice workbooks for every module — built with real-world data from Nepal.' },
+          { icon: '📥', title: 'Take-home files', body: 'Downloadable .xlsx practice workbooks for every module — built with real-world data.' },
           { icon: '📊', title: 'Workplace-ready', body: 'Content calibrated to what teams actually do: payroll, reports, data cleaning, dashboards.' },
         ].map(({ icon, title, body }) => (
           <div class="value-card">
@@ -99,7 +99,7 @@ const featuredCourse = published[0];
       <div class="courses-header">
         <div>
           <h2 class="section-title">All Courses</h2>
-          <p class="section-sub">More courses launching throughout 2025.</p>
+          <p class="section-sub">More courses launching this year.</p>
         </div>
         <a href="/courses" class="btn btn-secondary">See full catalog</a>
       </div>
@@ -144,7 +144,7 @@ const featuredCourse = published[0];
         <h2 class="cta-banner-title">Ready to train your team?</h2>
         <p class="cta-banner-sub">Get in touch — we'll customise a programme for your organisation.</p>
       </div>
-      <a href="mailto:training@vritjobs.com" class="btn btn-primary btn-lg">Contact Us</a>
+      <a href="mailto:bista.alish11@gmail.com" class="btn btn-primary btn-lg">Contact Us</a>
     </div>
   </section>
 </BaseLayout>
@@ -152,50 +152,54 @@ const featuredCourse = published[0];
 <style>
   /* ── Hero ── */
   .hero {
-    background: var(--ink);
+    background: var(--surface);
     padding: 100px 0 80px;
+    border-bottom: 1px solid var(--border);
   }
   .hero-eyebrow {
     font-size: 12px;
     font-weight: 600;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.4);
+    color: var(--accent);
     margin-bottom: 20px;
   }
   .hero-title {
     font-family: var(--font-display);
     font-size: clamp(52px, 8vw, 96px);
     font-weight: 800;
-    color: #fff;
+    color: var(--navy);
     line-height: 0.95;
     margin-bottom: 28px;
   }
   .hero-sub {
     font-size: 20px;
-    color: rgba(255,255,255,0.55);
+    color: var(--muted);
     max-width: 520px;
     line-height: 1.65;
     margin-bottom: 40px;
   }
   .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 56px; }
-  .btn-ghost {
-    background: rgba(255,255,255,0.08);
-    color: rgba(255,255,255,0.85);
-    border: 1.5px solid rgba(255,255,255,0.14);
-  }
-  .btn-ghost:hover { background: rgba(255,255,255,0.13); }
   .hero-stats { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
-  .hero-stat { display: flex; flex-direction: column; gap: 2px; }
+  .hero-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 14px 20px;
+    box-shadow: var(--shadow);
+  }
   .hero-stat-num {
     font-family: var(--font-display);
     font-size: 32px;
     font-weight: 800;
-    color: #fff;
+    color: var(--navy);
     line-height: 1;
   }
-  .hero-stat-lbl { font-size: 13px; color: rgba(255,255,255,0.4); }
-  .hero-stat-divider { width: 1px; height: 36px; background: rgba(255,255,255,0.12); }
+  .hero-stat-lbl { font-size: 13px; color: var(--muted); }
+  .hero-stat-divider { width: 1px; height: 36px; background: var(--border); }
 
   /* ── Featured ── */
   .featured-header {
@@ -211,7 +215,7 @@ const featuredCourse = published[0];
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: var(--muted);
+    color: var(--accent);
     margin-bottom: 8px;
   }
   .featured-modules {
@@ -238,7 +242,7 @@ const featuredCourse = published[0];
     font-family: var(--font-display);
     font-size: 14px;
     font-weight: 700;
-    color: var(--ink);
+    color: var(--navy);
     line-height: 1.3;
   }
   .featured-module-time { font-size: 12px; color: var(--muted); }
@@ -256,7 +260,7 @@ const featuredCourse = published[0];
     font-family: var(--font-display);
     font-size: 18px;
     font-weight: 700;
-    color: var(--ink);
+    color: var(--navy);
     margin-bottom: 8px;
   }
   .value-body { font-size: 15px; color: var(--muted); line-height: 1.6; }
@@ -276,12 +280,13 @@ const featuredCourse = published[0];
   .course-card--dim { opacity: 0.55; }
   .course-card-accent { height: 3px; flex-shrink: 0; background: var(--border); }
   .course-card-body { padding: 24px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
-  .course-card-title { font-family: var(--font-display); font-size: 20px; font-weight: 800; color: var(--ink); }
+  .course-card-title { font-family: var(--font-display); font-size: 20px; font-weight: 800; color: var(--navy); }
   .course-card-tagline { font-size: 14px; color: var(--muted); line-height: 1.55; }
 
   /* ── CTA banner ── */
   .cta-banner {
-    background: var(--ink);
+    background: var(--surface);
+    border-top: 4px solid var(--accent);
     padding: 64px 0;
   }
   .cta-banner-inner {
@@ -295,8 +300,8 @@ const featuredCourse = published[0];
     font-family: var(--font-display);
     font-size: 32px;
     font-weight: 800;
-    color: #fff;
+    color: var(--navy);
     margin-bottom: 8px;
   }
-  .cta-banner-sub { font-size: 17px; color: rgba(255,255,255,0.5); }
+  .cta-banner-sub { font-size: 17px; color: var(--muted); }
 </style>

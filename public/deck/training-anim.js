@@ -34,9 +34,9 @@ function animCount(el, target, prefix='', suffix='', dur=1200) {
     const p = Math.min((now-t0)/dur, 1);
     const ease = 1 - Math.pow(1-p, 3);
     const cur = Math.round(ease * endVal);
-    el.textContent = prefix + cur.toLocaleString('en-IN') + suffix;
+    el.textContent = prefix + cur.toLocaleString('en-US') + suffix;
     if (p < 1) requestAnimationFrame(tick);
-    else el.textContent = prefix + endVal.toLocaleString('en-IN') + suffix;
+    else el.textContent = prefix + endVal.toLocaleString('en-US') + suffix;
   })(t0);
 }
 
@@ -181,7 +181,7 @@ ANIMS[21] = s => {
         running += parseFloat(row.dataset.val || 0);
         if (totalEl) {
           totalEl.style.background = '#DFFAEB';
-          totalEl.textContent = '₹' + running.toLocaleString('en-IN');
+          totalEl.textContent = '$' + running.toLocaleString('en-US');
         }
       }, i * 500 + 600);
     }

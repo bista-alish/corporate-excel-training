@@ -22,7 +22,7 @@ const { title, tagline, description, duration, moduleCount, level, modules, prac
 const totalMinutes = modules.reduce((sum, m) => sum + m.minutes, 0);
 ---
 
-<BaseLayout title={`${title} — Vrit Jobs Training`} description={description}>
+<BaseLayout title={`${title} — Corporate Excel Training`} description={description}>
 
   <!-- ── Course hero ── -->
   <section class="course-hero">
@@ -122,16 +122,17 @@ const totalMinutes = modules.reduce((sum, m) => sum + m.minutes, 0);
 
 <style>
   .course-hero {
-    background: var(--ink);
+    background: var(--surface);
     position: relative;
     padding: 56px 0 64px;
+    border-bottom: 1px solid var(--border);
   }
   .hero-accent-bar {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    height: 3px;
+    height: 4px;
     background: var(--accent);
   }
   .course-hero-inner { padding-top: 8px; }
@@ -141,11 +142,11 @@ const totalMinutes = modules.reduce((sum, m) => sum + m.minutes, 0);
     gap: 6px;
     font-size: 14px;
     font-weight: 500;
-    color: rgba(255,255,255,0.55);
+    color: var(--muted);
     margin-bottom: 32px;
     transition: color 160ms;
   }
-  .back-link:hover { color: rgba(255,255,255,0.9); }
+  .back-link:hover { color: var(--accent); }
   .course-hero-content {
     display: flex;
     align-items: flex-start;
@@ -159,19 +160,19 @@ const totalMinutes = modules.reduce((sum, m) => sum + m.minutes, 0);
     font-family: var(--font-display);
     font-size: clamp(32px, 5vw, 54px);
     font-weight: 800;
-    color: #fff;
+    color: var(--navy);
     line-height: 1.05;
     margin-bottom: 14px;
   }
   .course-tagline {
     font-size: 19px;
-    color: rgba(255,255,255,0.65);
+    color: var(--muted);
     line-height: 1.6;
     max-width: 520px;
     margin-bottom: 32px;
   }
   .course-hero-cta { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
-  .course-hero-meta { font-size: 14px; color: rgba(255,255,255,0.45); }
+  .course-hero-meta { font-size: 14px; color: var(--muted); }
   .course-hero-stats {
     display: flex;
     gap: 12px;
@@ -179,8 +180,8 @@ const totalMinutes = modules.reduce((sum, m) => sum + m.minutes, 0);
     align-self: flex-end;
   }
   .stat-box {
-    background: rgba(255,255,255,0.07);
-    border: 1px solid rgba(255,255,255,0.1);
+    background: var(--bg);
+    border: 1px solid var(--border);
     border-radius: var(--radius-md);
     padding: 16px 20px;
     display: flex;
@@ -189,15 +190,16 @@ const totalMinutes = modules.reduce((sum, m) => sum + m.minutes, 0);
     gap: 4px;
     min-width: 90px;
     text-align: center;
+    box-shadow: var(--shadow);
   }
   .stat-box-icon { font-size: 20px; }
   .stat-box-val {
     font-family: var(--font-display);
     font-size: 18px;
     font-weight: 800;
-    color: #fff;
+    color: var(--navy);
   }
-  .stat-box-lbl { font-size: 12px; color: rgba(255,255,255,0.5); }
+  .stat-box-lbl { font-size: 12px; color: var(--muted); }
 
   /* ── Body ── */
   .course-body {
@@ -216,7 +218,7 @@ const totalMinutes = modules.reduce((sum, m) => sum + m.minutes, 0);
     font-family: var(--font-display);
     font-size: 26px;
     font-weight: 800;
-    color: var(--ink);
+    color: var(--navy);
   }
   .course-description {
     font-size: 17px;
@@ -238,7 +240,7 @@ const totalMinutes = modules.reduce((sum, m) => sum + m.minutes, 0);
     font-family: var(--font-display);
     font-size: 18px;
     font-weight: 800;
-    color: var(--ink);
+    color: var(--navy);
   }
   .sidebar-card-body { font-size: 14px; color: var(--muted); line-height: 1.6; }
   .start-hints {

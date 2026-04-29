@@ -1,19 +1,40 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap');
 
 :root {
-  --ink:     #111827;
-  --accent:  #1B4DE4;
-  --bg:      #FFFFFF;
-  --surface: #F7F7F8;
-  --border:  #E4E4E7;
-  --text:    #18181B;
-  --muted:   #71717A;
-  --shadow:  0 1px 4px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.06);
+  /* Brand */
+  --navy:        #0C1F5C;   /* single dark; footer + headings */
+  --accent:      #1B4DE4;   /* single blue */
+  --excel-green: #107C41;   /* RESERVED for functional Excel result cells. Never use as UI accent. */
 
+  /* Surfaces (light) */
+  --bg:        #FFFFFF;
+  --surface:   #F7F9FC;
+  --surface-2: #EAF0FF;
+
+  /* Neutral ramp */
+  --gray-100: #EEF1F7;
+  --gray-200: #E4E7EE;
+  --gray-300: #D0D5DE;
+  --gray-500: #6B7280;
+  --gray-700: #374151;
+
+  /* Semantic */
+  --text:   #0C1040;
+  --muted:  #4A5578;
+  --border: #E4E7EE;
+  --shadow: 0 1px 4px rgba(12,31,92,0.05), 0 4px 16px rgba(12,31,92,0.06);
+
+  /* Footer (lone dark surface) */
+  --footer-bg:    var(--navy);
+  --footer-text:  rgba(255,255,255,0.82);
+  --footer-muted: rgba(255,255,255,0.55);
+
+  /* Typography */
   --font-display: 'Plus Jakarta Sans', sans-serif;
   --font-body:    'Inter', sans-serif;
   --font-mono:    'JetBrains Mono', monospace;
 
+  /* Radii */
   --radius-sm:   8px;
   --radius-md:   14px;
   --radius-lg:   20px;

@@ -66,4 +66,4 @@ practiceFiles:
     file: /practice/capstone.xlsx
 ---
 
-A day-long hands-on workshop built for Vrit Jobs' corporate training programme. Real data, real formulas, real results.
+A day-long hands-on workshop. Real data, real formulas, real results.

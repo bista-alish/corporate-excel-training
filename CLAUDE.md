@@ -14,7 +14,7 @@ Deploy: Vercel auto-detects Astro. Connect the repo — no config needed beyond 
 
 ## Architecture
 
-Astro static site (`output: 'static'`). The repo is a multi-course educational platform for Vrit Jobs corporate training.
+Astro static site (`output: 'static'`). Multi-course corporate training platform. Design source-of-truth: `Corporate_Excel.pptx` in repo root — minimal two-color palette (navy + blue), light theme.
 
 ```
 src/
